@@ -6,15 +6,16 @@ unsigned int pres;unsigned int prev1;unsigned int prev2;unsigned int prev3;unsig
 unsigned int timeout=durationWindow+1;
 unsigned int readValue;
 unsigned int localAvg;
+
 void setup(){
   Serial.begin(230400);
-  readValue=analogRead(sensorInput);
-  pres=readValue;prev1=pres;prev2=prev1;prev3=prev2;prev4=prev3;
+  pinMode(sensorInput,INPUT_ANALOG);
 }
 
 void loop(){
   readValue=analogRead(sensorInput);
   pres=readValue;
+  prev4=prev3;prev3=prev2;prev2=prev1;prev1=pres;
   localAvg=(prev1+prev2+prev3+prev4)/4;
   if(abs((int)(pres-localAvg)) > threshold){
     if(timeout > durationWindow){
@@ -33,5 +34,4 @@ void loop(){
       Serial.write(0);Serial.write(0);Serial.write(0);Serial.write(0);Serial.write('\n');
       timeout--;
   }
-  prev4=prev3;prev3=prev2;prev2=prev1;prev1=pres;
 }

@@ -1,4 +1,4 @@
-#define buffLength 8850
+#define buffLength 8750
 #define sensorInput PA0
 #define threshold 8
 
@@ -11,6 +11,7 @@ byte buff[buffLength*2];
 void setup(){
   Serial.begin(230400);
   pres=analogRead(sensorInput);
+  pinMode(sensorInput,INPUT_ANALOG);
   pinMode(PB12,OUTPUT);
   digitalWrite(PB12,HIGH);
 }
@@ -46,7 +47,7 @@ void loop(){
       byte temp[10] ={highByte((unsigned int)prev4),lowByte((unsigned int)prev4),highByte((unsigned int)prev3),lowByte((unsigned int)prev3),highByte((unsigned int)prev2),lowByte((unsigned int)prev2),highByte((unsigned int)prev1),lowByte((unsigned int)prev1),highByte((unsigned int)pres),lowByte((unsigned int)pres)};
       Serial.write(temp,10);
       // I noticed that sending 0 is much faster than sending other values.
-      Serial.write('\0');Serial.write('\0');
+      Serial.write(0);Serial.write(0);
       digitalWrite(PB12,HIGH);
       timeout--;
     }
