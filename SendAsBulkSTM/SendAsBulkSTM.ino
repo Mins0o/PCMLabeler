@@ -1,6 +1,6 @@
 #define buffLength 8750
 #define sensorInput PA0
-#define threshold 8
+#define threshold 15
 
 float pres;float prev1; float prev2; float prev3; float prev4; float prev5;
 float localAvg;
@@ -19,7 +19,7 @@ void setup(){
 void loop(){
   readValue=analogRead(sensorInput);
   prev5=prev4;prev4=prev3;prev3=prev2;prev2=prev1;prev1=pres;
-  pres=readValue*0.1+pres*0.9;
+  pres=readValue;//*0.1+pres*0.9;
   localAvg=(prev1+prev2+prev3+prev4+prev5)/5;
 
   // If significant sound occurs,
