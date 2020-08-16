@@ -1,6 +1,6 @@
 #define buffLength 8750
-#define sensorInput PA0
-#define threshold 15
+#define sensorInput PB0
+#define threshold 45
 
 float pres;float prev1; float prev2; float prev3; float prev4; float prev5;
 float localAvg;
@@ -10,16 +10,16 @@ byte buff[buffLength*2];
 
 void setup(){
   Serial.begin(230400);
-  pres=analogRead(sensorInput);
   pinMode(sensorInput,INPUT_ANALOG);
   pinMode(PB12,OUTPUT);
   digitalWrite(PB12,HIGH);
+  pres=analogRead(sensorInput);
 }
 
 void loop(){
   readValue=analogRead(sensorInput);
   prev5=prev4;prev4=prev3;prev3=prev2;prev2=prev1;prev1=pres;
-  pres=readValue;//*0.1+pres*0.9;
+  pres=readValue*0.3+pres*0.7;
   localAvg=(prev1+prev2+prev3+prev4+prev5)/5;
 
   // If significant sound occurs,
