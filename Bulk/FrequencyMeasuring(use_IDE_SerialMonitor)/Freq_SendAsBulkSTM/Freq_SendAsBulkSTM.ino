@@ -46,7 +46,7 @@ void loop(){
       float interval=(millis()-frequencyTimer);
       Serial.print(interval);
       Serial.println("ms");
-	    Serial.print((float)(buffLength)/interval);
+	    Serial.print(buffLength/(interval/1.0));
       Serial.println("kHz");
 	  /*	
       digitalWrite(PB12,LOW);

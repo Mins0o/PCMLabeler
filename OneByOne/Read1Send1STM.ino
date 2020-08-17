@@ -28,7 +28,7 @@ void loop(){
     }
     
 	// and Refresh timeout 
-    timeout = durationWindow;
+    timeout = durationWindow-1;
   }
   
   // While the time hasn't ran out(When it runs out, it overflows)
@@ -36,6 +36,7 @@ void loop(){
 	
 	// Printout the reading.
 	// prev4 is selected to give a slightly broader picture of the signal.
+	// highByte is strongly discouraged http://docs.leaflabs.com/static.leaflabs.com/pub/leaflabs/maple-docs/latest/lang/api/highbyte.html#lang-highbyte
     byte singlePackage[3]={highByte(prev4),lowByte(prev4),'\n'};
     Serial.write(singlePackage,3);
     timeout--;

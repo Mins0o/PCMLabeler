@@ -1,15 +1,18 @@
-#define sensorInput A3
+#define sensorInput PA0
 #define threshold 5
 #define durationWindow 200
+#define maxcount 100000
 
 unsigned int pres;unsigned int prev1;unsigned int prev2;unsigned int prev3;unsigned int prev4;
 unsigned int timeout=durationWindow+1;
 unsigned int readValue;
 unsigned int localAvg;
+unsigned int loopCount=-1;
+unsigned int timer;
 
 void setup(){
   Serial.begin(230400);
-
+  pinMode(sensorInput,INPUT_ANALOG);
 }
 
 void loop(){
@@ -19,15 +22,20 @@ void loop(){
   localAvg=(prev1+prev2+prev3+prev4)/4;
   
   // When significant sound occurs
-  if(abs((int)(pres-localAvg)) > threshold){
+  int crit = abs((int)(pres-localAvg));
+  if(crit > threshold || true){
 	  
 	// Transmission has terminated before this trigger
     if(timeout > durationWindow){
       // New data transmission begins
       Serial.write(0);
     }
-	
-    // Renew timeout
+    if(loopCount>maxcount){
+      timer=millis();
+      loopCount=maxcount;
+    }
+    
+	// and Refresh timeout 
     timeout = durationWindow-1;
   }
   
@@ -36,7 +44,8 @@ void loop(){
 	
 	// Printout the reading.
 	// prev4 is selected to give a slightly broader picture of the signal.
-    byte singlePackage[3]={highByte(prev4),lowByte(prev4),'\n'};
+  // highByte is strongly discouraged http://docs.leaflabs.com/static.leaflabs.com/pub/leaflabs/maple-docs/latest/lang/api/highbyte.html#lang-highbyte
+    byte singlePackage[3]={highByte(prev4),lowByte(prev4),'y'};
     Serial.write(singlePackage,3);
     timeout--;
   }
@@ -46,4 +55,11 @@ void loop(){
       Serial.write(0);Serial.write(0);Serial.write(0);Serial.write(0);Serial.write('\n');
       timeout--;
   }
+  if(loopCount==0){
+    Serial.println();
+    Serial.print(maxcount/((millis()-timer)/1.0));
+    Serial.println(" kHz");
+    timer=millis();
+  }
+  loopCount--;
 }
