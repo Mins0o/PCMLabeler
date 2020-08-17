@@ -1,12 +1,13 @@
 #define buffLength 8750
-#define sensorInput PB0
-#define threshold 45
+#define sensorInput PA0
+#define threshold 50
 
 float pres;float prev1; float prev2; float prev3; float prev4; float prev5;
 float localAvg;
 unsigned int readValue;
 unsigned int timeout = buffLength+1;
 byte buff[buffLength*2];
+//unsigned int frequencyTimer;
 
 void setup(){
   Serial.begin(230400);
@@ -19,7 +20,7 @@ void setup(){
 void loop(){
   readValue=analogRead(sensorInput);
   prev5=prev4;prev4=prev3;prev3=prev2;prev2=prev1;prev1=pres;
-  pres=readValue*0.3+pres*0.7;
+  pres=readValue;//*0.3+pres*0.7;
   localAvg=(prev1+prev2+prev3+prev4+prev5)/5;
 
   // If significant sound occurs,
@@ -29,6 +30,7 @@ void loop(){
       // If buffer recording hasn't started,
       // Reset buffer pointer
       timeout=buffLength;
+	  //frequencyTimer=millis();
     }
   }
   // If the buffer is being filled
@@ -41,6 +43,7 @@ void loop(){
     // If the last buffer was filled
     // Start transmission and proceed one more step in timeout counter
     if (timeout==0){
+	    //Serial.println(millis()-frequencyTimer);
       digitalWrite(PB12,LOW);
       Serial.write('\n');Serial.write('\n');
       Serial.write(buff,buffLength*2);
