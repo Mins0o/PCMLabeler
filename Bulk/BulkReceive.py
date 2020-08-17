@@ -12,7 +12,7 @@ def ChooseDevice():
         selection=int(input("Choose a valid number from the list\n>>> "))
     baudRate=230400
     try:
-        baudRate=int(input("What is the baud rate? ex) STM32--230400, AVR--74880"))
+        baudRate=int(input("What is the baud rate? ex) 230400"))
     device = serial.Serial("/dev/"+devices[selection],baudRate)
     return device
 

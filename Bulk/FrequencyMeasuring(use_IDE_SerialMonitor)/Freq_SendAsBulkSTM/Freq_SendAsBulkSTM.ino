@@ -1,20 +1,20 @@
-#define buffLength 870
-#define sensorInput A3
-#define threshold 10
+#define buffLength 8750
+#define sensorInput PA0
+#define threshold 50
 
 float pres;float prev1; float prev2; float prev3; float prev4; float prev5;
 float localAvg;
 unsigned int readValue;
 unsigned int timeout = buffLength+1;
 byte buff[buffLength*2];
-//unsigned int timer;
+unsigned long frequencyTimer;
 
 void setup(){
-  Serial.begin(74880);
-  //pinModee(sensorInput,INPUT);
+  Serial.begin(230400);
+  pinMode(sensorInput,INPUT_ANALOG);
+  pinMode(PB12,OUTPUT);
+  digitalWrite(PB12,HIGH);
   pres=analogRead(sensorInput);
-  pinMode(13,OUTPUT);
-  digitalWrite(13,LOW);
 }
 
 void loop(){
@@ -30,7 +30,7 @@ void loop(){
       // If buffer recording hasn't started,
       // Reset buffer pointer
       timeout=buffLength;
-      //timer=millis();
+	  frequencyTimer=millis();
     }
   }
   // If the buffer is being filled
@@ -43,16 +43,21 @@ void loop(){
     // If the last buffer was filled
     // Start transmission and proceed one more step in timeout counter
     if (timeout==0){
-      //Serial.print((float)(buffLength)/(float)(millis()-timer));
-      //Serial.println("kHz");
-      digitalWrite(13,HIGH);
+      float interval=(millis()-frequencyTimer);
+      Serial.print(interval);
+      Serial.println("ms");
+	    Serial.print((float)(buffLength)/interval);
+      Serial.println("kHz");
+	  /*	
+      digitalWrite(PB12,LOW);
       Serial.write('\n');Serial.write('\n');
       Serial.write(buff,buffLength*2);
       byte temp[10] ={highByte((unsigned int)prev4),lowByte((unsigned int)prev4),highByte((unsigned int)prev3),lowByte((unsigned int)prev3),highByte((unsigned int)prev2),lowByte((unsigned int)prev2),highByte((unsigned int)prev1),lowByte((unsigned int)prev1),highByte((unsigned int)pres),lowByte((unsigned int)pres)};
       Serial.write(temp,10);
       // I noticed that sending 0 is much faster than sending other values.
       Serial.write(0);Serial.write(0);
-      digitalWrite(13,LOW);
+      digitalWrite(PB12,HIGH);
+      */
       timeout--;
     }
   }

@@ -7,7 +7,7 @@ float localAvg;
 unsigned int readValue;
 unsigned int timeout = buffLength+1;
 byte buff[buffLength*2];
-unsigned int frequencyTimer;
+//unsigned long frequencyTimer;
 
 void setup(){
   Serial.begin(230400);
@@ -30,7 +30,7 @@ void loop(){
       // If buffer recording hasn't started,
       // Reset buffer pointer
       timeout=buffLength;
-	  frequencyTimer=millis();
+	  //frequencyTimer=millis();
     }
   }
   // If the buffer is being filled
@@ -43,10 +43,13 @@ void loop(){
     // If the last buffer was filled
     // Start transmission and proceed one more step in timeout counter
     if (timeout==0){
-      float frequency=(float)(buffLength)/(float)(millis()-frequencyTimer);
-	    Serial.print(frequency);
+	  /*
+      float interval=(millis()-frequencyTimer);
+      Serial.print(interval);
+      Serial.println("ms");
+      Serial.print((float)(buffLength)/interval);
       Serial.println("kHz");
-	    /*	
+      */
       digitalWrite(PB12,LOW);
       Serial.write('\n');Serial.write('\n');
       Serial.write(buff,buffLength*2);
@@ -55,7 +58,6 @@ void loop(){
       // I noticed that sending 0 is much faster than sending other values.
       Serial.write(0);Serial.write(0);
       digitalWrite(PB12,HIGH);
-      */
       timeout--;
     }
   }
