@@ -17,6 +17,7 @@ Human audible frequency is considered to be around `20 Hz` to `20 kHz`, and init
 ---
 These results are not accurate but an approximation. The results were consistant during the experiment, but it may vary on devices, and small change in code may alter the result dramatically.
 
+---
 ### Data
 The data is labeled as 
 - t : tap on mic
