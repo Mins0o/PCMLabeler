@@ -13,7 +13,7 @@ def LoadFiles(filePath=None):
 		path=input("What is the path of your data folder?\n>>> ")
 	else:
 		path=filePath
-	dataFiles = [file for file in listdir(path)]
+	dataFiles = [file for file in listdir(path) if file[-4:]==".tsv"]
 	for fileNum in range(len(dataFiles)):
 		print("{0:02d}\t{1}".format(fileNum,dataFiles[fileNum]))
 	selections=[int(x) for x in input("Type in indices of files, each separated by spacing\n>>> ").split()]
