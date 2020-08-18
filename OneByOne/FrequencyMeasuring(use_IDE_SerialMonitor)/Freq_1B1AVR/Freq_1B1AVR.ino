@@ -8,7 +8,7 @@ unsigned int timeout=durationWindow+1;
 unsigned int readValue;
 unsigned int localAvg;
 unsigned int loopCount=-1;
-unsigned int timer;
+unsigned long timer;
 
 void setup(){
   Serial.begin(230400);

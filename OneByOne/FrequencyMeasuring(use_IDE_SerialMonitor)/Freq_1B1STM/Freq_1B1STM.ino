@@ -8,10 +8,10 @@ unsigned int timeout=durationWindow+1;
 unsigned int readValue;
 unsigned int localAvg;
 unsigned int loopCount=-1;
-unsigned int timer;
+unsigned long timer;
 
 void setup(){
-  Serial.begin(230400);
+  Serial1.begin(230400);
   pinMode(sensorInput,INPUT_ANALOG);
 }
 
@@ -28,7 +28,7 @@ void loop(){
 	// Transmission has terminated before this trigger
     if(timeout > durationWindow){
       // New data transmission begins
-      Serial.write(0);
+      Serial1.write(0);
     }
     if(loopCount>maxcount){
       timer=millis();
@@ -46,19 +46,19 @@ void loop(){
 	// prev4 is selected to give a slightly broader picture of the signal.
   // highByte is strongly discouraged http://docs.leaflabs.com/static.leaflabs.com/pub/leaflabs/maple-docs/latest/lang/api/highbyte.html#lang-highbyte
     byte singlePackage[3]={highByte(prev4),lowByte(prev4),'y'};
-    Serial.write(singlePackage,3);
+    Serial1.write(singlePackage,3);
     timeout--;
   }
   
   // End of transmission stream.
   if(timeout==0){
-      Serial.write(0);Serial.write(0);Serial.write(0);Serial.write(0);Serial.write('\n');
+      Serial1.write(0);Serial1.write(0);Serial1.write(0);Serial1.write(0);Serial1.write('\n');
       timeout--;
   }
   if(loopCount==0){
-    Serial.println();
-    Serial.print(maxcount/((millis()-timer)/1.0));
-    Serial.println(" kHz");
+    Serial1.println();
+    Serial1.print(maxcount/((millis()-timer)/1.0));
+    Serial1.println(" kHz");
     timer=millis();
   }
   loopCount--;
