@@ -14,7 +14,7 @@ Human audible frequency is considered to be around `20 Hz` to `20 kHz`, and init
   DataPoints (AVR) | Samp.Rate (AVR) | DataPoints (STM32) | Samp.Rate (STM32)  
   --- | --- | --- | ---  
   900 | 7.5 ~ 7.91 kHz | 8750  | 45 ~ 46.8 kHz
-
+---
 These results are not accurate but an approximation. The results were consistant during the experiment, but it may vary on devices, and small change in code may alter the result dramatically.
 
 ### Data
