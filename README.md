@@ -26,7 +26,8 @@ The data is labeled as
 - s : snap
 ---
 ### Fourier Analysis
-![Fourier Transform](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample.png "Fourier Analysis")
+- Examples  
+![Fourier Transform](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample.png "Fourier Analysis")![Fourier Transform2](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample2.png "Fourier Analysis2")
 ---
 In this project, I learned
 - how to use an Arduino as an USB-SerialTTL converter and how MCU programming works.
