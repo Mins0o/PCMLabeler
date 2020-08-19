@@ -112,4 +112,5 @@ if(__name__=="__main__"):
 	x=np.array([np.array(data) for data in temp_x])
 	fouriers=[]
 	for i in range(len(x)):
-		fouriers.append(FourierTransform(x[i],7840,True))
+		print(y[i])
+		fouriers.append(FourierTransform(x[i],45000,True))
