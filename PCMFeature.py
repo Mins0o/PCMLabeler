@@ -37,7 +37,7 @@ def TsvToXY(filePath):
 	
 def FourierTransform(signal,samplingRate,title="",verbose=False):
 	timeAxis=np.arange(0,len(signal)/samplingRate,1/samplingRate,dtype="double")
-	frequencyCap=samplingRate//2
+	frequencyCap=samplingRate//2 # Nyquist Theorem
 	if not type(signal) == np.ndarray:
 		try:
 			signal=np.array(signal)
@@ -110,7 +110,8 @@ def FrequencyChart(freqCap=20000):
 
 if(__name__=="__main__"):
 	temp_x,y=TsvToXY('./Data/PCM_45kHz.tsv')
-	x=np.array([np.array(data) for data in temp_x])
+	x=np.array(temp_x)
+	#x=np.array([np.array(data) for data in temp_x])
 	fouriers=[]
 	for i in range(len(x)):
 		print(y[i])
