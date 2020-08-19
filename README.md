@@ -27,7 +27,7 @@ The data is labeled as
 ---
 ### Fourier Analysis
 - Examples  
-![Fourier Transform](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample.png "Fourier Analysis")![Fourier Transform2](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample2.png "Fourier Analysis2")
+![Fourier Transform](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample.png "Clap")![Fourier Transform2](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample2.png "Whistle")
 ---
 In this project, I learned
 - how to use an Arduino as an USB-SerialTTL converter and how MCU programming works.
