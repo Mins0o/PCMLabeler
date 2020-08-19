@@ -12,7 +12,9 @@ def ChooseDevice():
         selection=int(input("Choose a valid number from the list\n>>> "))
     baudRate=230400
     try:
-        baudRate=int(input("What is the baud rate? ex) 230400"))
+        baudRate=int(input("What is the baud rate? ex) 230400\n>>> "))
+    except:
+        print("baudRate should be an integer\nUsing 230400...\n")
     device = serial.Serial("/dev/"+devices[selection],baudRate)
     return device
 
