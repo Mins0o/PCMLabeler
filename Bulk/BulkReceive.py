@@ -21,10 +21,11 @@ def ChooseDevice():
 def RecordData(device):
     fileName= input("Title name to save data ex)data1\n>>> ")+".tsv"
     with open("./"+fileName,'a') as dataFile:
-       # Flush any incomplete transmission in the buffer.
+        # Flush any incomplete transmission in the buffer.
         while (device.in_waiting>0):
             rawRead=device.reset_input_buffer()
         print("Flushed Buffer")
+        time.sleep(1)
         # Loop and wait for input
         while True:
             rawRead=None
@@ -55,6 +56,7 @@ def RecordData(device):
                     elif len(label)>1: 
                         return
                     # Flush anything that came in during user interface
+                    time.sleep(0.8)
                     while device.in_waiting>0:
                         device.reset_input_buffer()
                     print("Waiting for input...")
