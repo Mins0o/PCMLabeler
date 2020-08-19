@@ -8,9 +8,9 @@ def TsvToLine(filePath):
 		data=[]
 		for line in lines:
 			try:
-				singleLine=([[int(x) for x in col.split(',')] for col in line[:-1]],line[-1])
+				singleLine=([int(x) for x in line[0].split(',')],line[-1])
 			except ValueError:
-				singleLine=([[x for x in col.split(',')] for col in line[:-1]],line[-1])
+				singleLine=([x for x in line[0].split(',')],line[-1])
 			data.append(singleLine)
 	return data
 	
@@ -35,7 +35,7 @@ def TsvToXY(filePath):
 		label=[line[-1] for line in lines]
 	return(data,label)
 	
-def FourierTransform(signal,samplingRate,verbose=False):
+def FourierTransform(signal,samplingRate,title="",verbose=False):
 	timeAxis=np.arange(0,len(signal)/samplingRate,1/samplingRate,dtype="double")
 	frequencyCap=samplingRate//2
 	if not type(signal) == np.ndarray:
@@ -92,6 +92,7 @@ def FourierTransform(signal,samplingRate,verbose=False):
 	if verbose:
 		plt.subplot(2,1,1)
 		plt.plot(timeAxis,signal)
+		plt.title(title.upper())
 		plt.subplot(2,1,2)
 		plt.plot(frequencyChart,np.abs(fourier))
 		plt.show()
@@ -113,4 +114,4 @@ if(__name__=="__main__"):
 	fouriers=[]
 	for i in range(len(x)):
 		print(y[i])
-		fouriers.append(FourierTransform(x[i],45000,True))
+		fouriers.append(FourierTransform(x[i],45000,y[i],True))
