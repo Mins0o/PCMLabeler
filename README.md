@@ -25,9 +25,12 @@ The data is labeled as
 - w : whistle
 - s : snap
 ---
-
+### Fourier Analysis
+![Fourier Transform](https://github.com/Mins0o/AudioPCMLabeler/raw/master/FourierExample.png "Fourier Analysis")
+---
 In this project, I learned
 - how to use an Arduino as an USB-SerialTTL converter and how MCU programming works.
 - how sampling rates work and how to measure it in MCU.
 - comparing the cost-benefit of using MCU's memory or communication capability. The two different methods of record the audio PCM has their pros and cons.
 - utilizing MCU's memory capacity to its max to increase sampling rate.
+- performing orthodox(not FFT algorithm) Fourier transform on PCM data.
