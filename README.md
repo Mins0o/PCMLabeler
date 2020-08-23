@@ -3,6 +3,8 @@ I created a tool to measure and label audio PCM data for signal processing (Four
 I started with Arduino AVR devices but realized their limitations of computing power and frequency.  
 Human audible frequency is considered to be around `20 Hz` to `20 kHz`, and initial method with an arduino I could only acheive `300 Hz`. This was greatly imporved after several experiments.
 ## Experiments
+### Wiring Setup
+![AVR Connection](https://github.com/Mins0o/AudioPCMLabeler/raw/master/AVRConnection.png "AVR") ![STM32 Connection](https://github.com/Mins0o/AudioPCMLabeler/raw/master/STMConnection.png "STM32")
 ### Read One, Send Each Time
  (Without any floating point calculation, Arduino's 2-byte integer arithmetic is very powerful. With a single floating point variable per loop, 11.18 kHz goes down to 1 kHz.)
   BaudRate | Arduino | STM32  
