@@ -2,6 +2,7 @@ from os import listdir
 import csv
 	
 def TsvToData(filePath):
+	"""This method reads .tsv file and returns the data, XY split in a tuple"""
 	with open(filePath,'r') as file:
 		lines=list(csv.reader(file,delimiter='\t'))
 		data=[[int(x) for x in line[0].split(',')] for line in lines]
@@ -9,6 +10,10 @@ def TsvToData(filePath):
 	return(data,label)
 	
 def LoadFiles(filePath=None):
+	"""This method returns a dictionary of data which are divided into X and Y.
+	For example, if <file1.tsv>, <file2.tsv>, <file3.tsv> are loaded,
+	{"file1.tsv" : <data1>, "file2.tsv" : <data2>, "file3.tsv" : <data3>}
+	where each <data#> is formatted as ([data_0, ..., data_n], [label_0, ..., label_n])"""
 	if filePath==None:
 		path=input("What is the path of your data folder?\n>>> ")
 	else:
@@ -23,6 +28,8 @@ def LoadFiles(filePath=None):
 	return(filesDict)
 
 def TruncateToMin(dataCollection):
+	"""This method matches the length of the data by cutting off the tails of longer files"""
+	print("<<<TruncateToMinLength() in progress>>>")
 	# Get minimum length and file name of it
 	minLength=9999999
 	fileName=""
@@ -44,6 +51,7 @@ def TruncateToMin(dataCollection):
 	return output
 
 def SaveData(data,filePath=None):
+	"""This method saves an XY-split data into a tsv file"""
 	if filePath==None:
 		path=input("What is the path of your data folder?\n>>> ")
 	else:
