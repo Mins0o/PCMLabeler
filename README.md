@@ -1,7 +1,7 @@
 ## Introduction
 I created a tool to measure and label audio PCM data for signal processing (Fourier transform etc.) & machine learning.  
 I started with Arduino AVR devices but realized their limitations of computing power and frequency.  
-Human audible frequency is considered to be around `20 Hz` to `20 kHz`, and initial method with an arduino I could only acheive `300 Hz`. This was greatly imporved after several experiments.
+Human audible frequency is considered to be around `20 Hz` to `20 kHz`, and initial method with an arduino I could only achieve `300 Hz`. This was greatly improved after several experiments.
 ## Experiments
 ### Wiring Setup
 ![AVR Connection](https://github.com/Mins0o/AudioPCMLabeler/raw/master/AVRConnection.png "AVR") ![STM32 Connection](https://github.com/Mins0o/AudioPCMLabeler/raw/master/STMConnection.png "STM32")
